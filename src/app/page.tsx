@@ -1,3 +1,5 @@
+import Link from "next/link";
+import Image from "next/image";
 import styles from "./page.module.css";
 
 // Mock data for today's visits
@@ -19,33 +21,79 @@ const todaysVisits = [
   },
 ];
 
-export default function Home() {
+const features = [
+  {
+    title: "Schedule Visits",
+    description:
+      "Easily coordinate care visits and manage schedules in one place. Keep track of who's visiting and when.",
+    icon: "📅",
+  },
+  {
+    title: "Share Notes",
+    description:
+      "Keep all family members informed with shared notes and updates about your loved one's care journey.",
+    icon: "📝",
+  },
+  {
+    title: "Track Tasks",
+    description:
+      "Never miss important tasks or medications. Set reminders and track completion of daily activities.",
+    icon: "✓",
+  },
+];
+
+export default function HomePage() {
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <h1 className={styles.welcomeText}>Welcome to Nurtura</h1>
-        <p className={styles.subtitle}>Caring for your loved ones, together.</p>
-      </header>
+      <div className={styles.hero}>
+        <div className={styles.heroBackground}>
+          <Image
+            src="/logged-out-background.png"
+            alt=""
+            fill
+            priority
+            className={styles.heroImage}
+            sizes="100vw"
+            role="presentation"
+          />
+          <div className={styles.heroOverlay} />
+        </div>
 
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Today's Scheduled Visits</h2>
-        <ul className={styles.visitList}>
-          {todaysVisits.map((visit, index) => (
-            <li key={index} className={styles.visitItem}>
-              <div className={styles.visitTime}>{visit.time}</div>
-              <div className={styles.visitCarer}>
-                {visit.carer} · {visit.tasks}
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>
+            Caring for your parents,
+            <br />
+            made easier.
+          </h1>
+          <p className={styles.heroSubtitle}>
+            Nurtura helps you organise care, coordinate visits, and keep
+            everyone in the loop.
+          </p>
+          <Link href="/dashboard" className={styles.ctaButton}>
+            Get Started
+          </Link>
+        </div>
+      </div>
+
+      <section className={styles.features}>
+        <div className={styles.featuresGrid}>
+          {features.map((feature) => (
+            <div key={feature.title} className={styles.featureCard}>
+              <div className={styles.featureIcon} aria-hidden="true">
+                {feature.icon}
               </div>
-            </li>
+              <h2 className={styles.featureTitle}>{feature.title}</h2>
+              <p className={styles.featureDescription}>{feature.description}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
 
-      <div className={styles.actionButtons}>
-        <button className={styles.primaryButton}>Add Visit</button>
-        <button className={styles.secondaryButton}>Add Task</button>
-        <button className={styles.secondaryButton}>Add Family Member</button>
-      </div>
+      <footer className={styles.footer}>
+        <p className={styles.footerText}>
+          © {new Date().getFullYear()} Nurtura. Making care coordination easier.
+        </p>
+      </footer>
     </div>
   );
 }

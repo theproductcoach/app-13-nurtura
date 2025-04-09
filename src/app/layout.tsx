@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Nurtura - Care Management",
-  description: "Helping you organize care for your loved ones",
+  description: "Helping you organise care for your loved ones",
 };
 
 export default function RootLayout({
@@ -26,6 +26,7 @@ export default function RootLayout({
     <html lang="en" className="light">
       <head>
         <meta name="color-scheme" content="light" />
+        <link rel="icon" href="/favicon.ico" />
       </head>
       <body
         suppressHydrationWarning
