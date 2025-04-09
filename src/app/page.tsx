@@ -69,9 +69,14 @@ export default function HomePage() {
             Nurtura helps you organise care, coordinate visits, and keep
             everyone in the loop.
           </p>
-          <Link href="/dashboard" className={styles.ctaButton}>
-            Get Started
-          </Link>
+          <div className={styles.buttonContainer}>
+            <Link href="/choose-role" className={styles.ctaButton}>
+              Get Started
+            </Link>
+            <Link href="/sign-in" className={styles.loginButton}>
+              Log In
+            </Link>
+          </div>
         </div>
       </div>
 
