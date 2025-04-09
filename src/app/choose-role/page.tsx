@@ -24,7 +24,7 @@ export default function ChooseRole() {
         </header>
 
         <main className={styles.main}>
-          <Link href="/dashboard" className={styles.roleCard}>
+          <Link href="/onboarding/family" className={styles.roleCard}>
             <span className={styles.roleIcon}>👨‍👩‍👧‍👦</span>
             <div className={styles.roleContent}>
               <h2 className={styles.roleTitle}>

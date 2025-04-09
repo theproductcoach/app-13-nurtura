@@ -86,21 +86,21 @@
     box-shadow: 0 4px 12px rgba(59, 169, 156, 0.3);
   }
   
-  .loginButton {
-    display: inline-block;
-    background: transparent;
-    color: white;
+.loginButton {
+  display: inline-block;
+  background-color: #ffffff;
+    color: #3ba99c;
     padding: 1rem 2rem;
     border-radius: 12px;
     font-size: 1.125rem;
     font-weight: 600;
     transition: all 0.2s ease;
-    border: 2px solid rgba(255, 255, 255, 0.8);
+  border: none;
     min-width: 200px;
   }
   
   .loginButton:hover {
-    background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.9);
   transform: translateY(-2px);
 }
 

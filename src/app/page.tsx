@@ -73,7 +73,7 @@ export default function HomePage() {
             <Link href="/choose-role" className={styles.ctaButton}>
               Get Started
             </Link>
-            <Link href="/sign-in" className={styles.loginButton}>
+            <Link href="/login" className={styles.loginButton}>
               Log In
             </Link>
           </div>

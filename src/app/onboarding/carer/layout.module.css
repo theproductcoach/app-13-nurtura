@@ -1,0 +1,241 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.input {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
+    width: 100%;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #3ba99c;
+    box-shadow: 0 0 0 2px rgba(59, 169, 156, 0.2);
+}
+
+.textarea {
+    composes: input;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.photoUpload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.photoUpload:hover {
+    border-color: #3ba99c;
+    background: rgba(59, 169, 156, 0.05);
+}
+
+.photoPreview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.photoPreview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photoIcon {
+    font-size: 2rem;
+    color: var(--text-secondary);
+}
+
+.checkboxGroup {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+}
+
+.checkbox {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 4px;
+    accent-color: #3ba99c;
+}
+
+.availabilityGrid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.availabilityCard {
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.availabilityCard.selected {
+    background: rgba(59, 169, 156, 0.1);
+    border-color: #3ba99c;
+}
+
+.availabilityCard:hover {
+    border-color: #3ba99c;
+}
+
+.welcomeScreen {
+    text-align: center;
+    padding: 2rem;
+}
+
+.welcomeTitle {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.welcomeMessage {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    flex: 1;
+    text-align: center;
+}
+
+.buttonPrimary {
+    background: #3ba99c;
+    color: white;
+    border: none;
+}
+
+.buttonPrimary:hover {
+    background: #319688;
+    transform: translateY(-1px);
+}
+
+.buttonSecondary {
+    background: white;
+    color: #3ba99c;
+    border: 1px solid #3ba99c;
+}
+
+.buttonSecondary:hover {
+    background: #f0f9f8;
+    transform: translateY(-1px);
+}
+
+.progress {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.progressDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-color);
+}
+
+.progressDotActive {
+    background: #3ba99c;
+}
+
+@media (min-width: 640px) {
+    .container {
+        padding: 3rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.125rem;
+    }
+
+    .welcomeTitle {
+        font-size: 2.5rem;
+    }
+}
