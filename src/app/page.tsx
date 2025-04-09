@@ -1,95 +1,51 @@
-import Image from "next/image";
 import styles from "./page.module.css";
+
+// Mock data for today's visits
+const todaysVisits = [
+  {
+    time: "9:00 AM - 10:30 AM",
+    carer: "Sarah Johnson",
+    tasks: "Morning routine, medication, breakfast",
+  },
+  {
+    time: "2:00 PM - 3:30 PM",
+    carer: "Michael Chen",
+    tasks: "Lunch, afternoon walk, vital signs check",
+  },
+  {
+    time: "8:00 PM - 9:00 PM",
+    carer: "Emma Williams",
+    tasks: "Evening routine, medication, light dinner",
+  },
+];
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1 className={styles.welcomeText}>Welcome to Nurtura</h1>
+        <p className={styles.subtitle}>Caring for your loved ones, together.</p>
+      </header>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Today's Scheduled Visits</h2>
+        <ul className={styles.visitList}>
+          {todaysVisits.map((visit, index) => (
+            <li key={index} className={styles.visitItem}>
+              <div className={styles.visitTime}>{visit.time}</div>
+              <div className={styles.visitCarer}>
+                {visit.carer} · {visit.tasks}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <div className={styles.actionButtons}>
+        <button className={styles.primaryButton}>Add Visit</button>
+        <button className={styles.secondaryButton}>Add Task</button>
+        <button className={styles.secondaryButton}>Add Family Member</button>
+      </div>
     </div>
   );
 }
