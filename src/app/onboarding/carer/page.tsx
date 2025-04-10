@@ -241,7 +241,7 @@ export default function CarerOnboardingPage() {
             families looking for care.
           </p>
           <button
-            onClick={() => router.push("/carer-dashboard")}
+            onClick={() => router.push("/dashboard-carer")}
             className={`${styles.button} ${styles.buttonPrimary}`}
           >
             View Your Dashboard

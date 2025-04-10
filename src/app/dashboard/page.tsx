@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import AddVisitModal from "../components/AddVisitModal";
 import AddTaskModal from "../components/AddTaskModal";
@@ -38,6 +39,24 @@ const UserGroupIcon = () => (
     fill="currentColor"
   >
     <path d="M10 9a3 3 0 100-6 3 3 0 000 6zM6 8a2 2 0 11-4 0 2 2 0 014 0zM1.49 15.326a.78.78 0 01-.358-.442 3 3 0 013.042-3.042 1.724 1.724 0 00.172 0 11.955 11.955 0 017.956 0c.058.002.115.002.172 0a3 3 0 013.042 3.042.78.78 0 01-.358.442l-.34.19a1.2 1.2 0 01-.614.166H2.458a1.2 1.2 0 01-.614-.166l-.34-.19z" />
+  </svg>
+);
+
+// Logout Icon SVG
+const LogoutIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={styles.logoutIcon}
+  >
+    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+    <polyline points="16 17 21 12 16 7"></polyline>
+    <line x1="21" y1="12" x2="9" y2="12"></line>
   </svg>
 );
 
@@ -89,27 +108,46 @@ const todaysVisits = [
 ];
 
 export default function Dashboard() {
+  const router = useRouter();
   const [isAddVisitModalOpen, setIsAddVisitModalOpen] = useState(false);
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false);
   const [isAddFamilyModalOpen, setIsAddFamilyModalOpen] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState("");
 
-  const handleSaveVisit = (visitData: { date: string; time: string; carer: string; notes: string }) => {
+  // Handle logout
+  const handleLogout = () => {
+    router.push("/");
+  };
+
+  const handleSaveVisit = (visitData: {
+    date: string;
+    time: string;
+    carer: string;
+    notes: string;
+  }) => {
     console.log("New visit data:", visitData);
     setConfirmationMessage("Visit scheduled successfully!");
     setShowConfirmation(true);
     setTimeout(() => setShowConfirmation(false), 3000);
   };
 
-  const handleSaveTask = (taskData: { task: string; dueDate: string; assignedTo: string }) => {
+  const handleSaveTask = (taskData: {
+    task: string;
+    dueDate: string;
+    assignedTo: string;
+  }) => {
     console.log("New task data:", taskData);
     setConfirmationMessage("Task added successfully!");
     setShowConfirmation(true);
     setTimeout(() => setShowConfirmation(false), 3000);
   };
 
-  const handleSaveFamily = (familyData: { name: string; age: string; relationship: string }) => {
+  const handleSaveFamily = (familyData: {
+    name: string;
+    age: string;
+    relationship: string;
+  }) => {
     console.log("New family member data:", familyData);
     setConfirmationMessage(
       `Family member ${familyData.name} (${familyData.relationship}) added successfully!`
@@ -139,8 +177,19 @@ export default function Dashboard() {
       )}
 
       <header className={styles.header}>
-        <h1 className={styles.welcomeText}>Welcome Back, Jeannie</h1>
-        <p className={styles.welcomeSubtext}>Here&apos;s your overview for today</p>
+        <div>
+          <h1 className={styles.welcomeText}>Welcome Back, Jeannie</h1>
+          <p className={styles.welcomeSubtext}>
+            Here&apos;s your overview for today
+          </p>
+        </div>
+        <button
+          className={styles.logoutButton}
+          onClick={handleLogout}
+          title="Logout"
+        >
+          <LogoutIcon />
+        </button>
       </header>
 
       <section className={styles.section}>
@@ -184,7 +233,9 @@ export default function Dashboard() {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <div className={styles.sectionTitleRow}>
-            <h2 className={styles.sectionTitle}>Today&apos;s Scheduled Visits</h2>
+            <h2 className={styles.sectionTitle}>
+              Today&apos;s Scheduled Visits
+            </h2>
           </div>
           <div className={styles.buttonRow}>
             <button
