@@ -1,74 +1,50 @@
+"use client";
 import { useState } from "react";
-import styles from "./AddVisitModal.module.css";
+import styles from "./Modal.module.css";
 
 interface AddVisitModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (visitData: any) => void;
+  onAddVisit: (visitData: {
+    date: string;
+    time: string;
+    carer: string;
+    notes: string;
+  }) => void;
 }
 
 export default function AddVisitModal({
   isOpen,
   onClose,
-  onSave,
+  onAddVisit,
 }: AddVisitModalProps) {
-  const [formData, setFormData] = useState({
-    recipient: "",
-    date: "",
-    time: "",
-    carerName: "",
-    tasks: "",
-  });
-
-  if (!isOpen) return null;
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [carer, setCarer] = useState("");
+  const [notes, setNotes] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    onAddVisit({ date, time, carer, notes });
+    setDate("");
+    setTime("");
+    setCarer("");
+    setNotes("");
     onClose();
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  if (!isOpen) return null;
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.header}>
-          <h2 className={styles.title}>Schedule a New Visit</h2>
-          <p className={styles.subtitle}>
-            Fill in the details below to schedule a new care visit
-          </p>
+    <div className={styles.modalOverlay}>
+      <div className={styles.modal}>
+        <div className={styles.modalHeader}>
+          <h2 className={styles.modalTitle}>Schedule a Visit</h2>
+          <button className={styles.closeButton} onClick={onClose}>
+            &times;
+          </button>
         </div>
-
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.formGroup}>
-            <label htmlFor="recipient" className={styles.label}>
-              Care Recipient
-            </label>
-            <select
-              id="recipient"
-              name="recipient"
-              className={styles.select}
-              value={formData.recipient}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select a care recipient</option>
-              <option value="Margaret Wilson">Margaret Wilson</option>
-              <option value="Robert Wilson">Robert Wilson</option>
-            </select>
-          </div>
-
+        <form onSubmit={handleSubmit} className={styles.modalForm}>
           <div className={styles.formGroup}>
             <label htmlFor="date" className={styles.label}>
               Date
@@ -76,14 +52,12 @@ export default function AddVisitModal({
             <input
               type="date"
               id="date"
-              name="date"
               className={styles.input}
-              value={formData.date}
-              onChange={handleChange}
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
               required
             />
           </div>
-
           <div className={styles.formGroup}>
             <label htmlFor="time" className={styles.label}>
               Time
@@ -91,46 +65,39 @@ export default function AddVisitModal({
             <input
               type="time"
               id="time"
-              name="time"
               className={styles.input}
-              value={formData.time}
-              onChange={handleChange}
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
               required
             />
           </div>
-
           <div className={styles.formGroup}>
-            <label htmlFor="carerName" className={styles.label}>
-              Carer Name
+            <label htmlFor="carer" className={styles.label}>
+              Carer
             </label>
             <input
               type="text"
-              id="carerName"
-              name="carerName"
+              id="carer"
               className={styles.input}
-              value={formData.carerName}
-              onChange={handleChange}
+              value={carer}
+              onChange={(e) => setCarer(e.target.value)}
               placeholder="Enter carer name"
               required
             />
           </div>
-
           <div className={styles.formGroup}>
-            <label htmlFor="tasks" className={styles.label}>
-              Tasks
+            <label htmlFor="notes" className={styles.label}>
+              Notes (Optional)
             </label>
             <textarea
-              id="tasks"
-              name="tasks"
+              id="notes"
               className={styles.textarea}
-              value={formData.tasks}
-              onChange={handleChange}
-              placeholder="Enter tasks for this visit"
-              required
-            />
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Add any additional notes"
+            ></textarea>
           </div>
-
-          <div className={styles.footer}>
+          <div className={styles.modalFooter}>
             <button
               type="button"
               className={styles.cancelButton}
@@ -138,8 +105,8 @@ export default function AddVisitModal({
             >
               Cancel
             </button>
-            <button type="submit" className={styles.saveButton}>
-              Save Visit
+            <button type="submit" className={styles.submitButton}>
+              Schedule Visit
             </button>
           </div>
         </form>

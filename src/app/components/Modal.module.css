@@ -1,0 +1,121 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.modalTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.modalForm {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.input {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.textarea {
+    composes: input;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.select {
+    composes: input;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
+.modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.cancelButton {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.submitButton {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    background: #3ba99c;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.submitButton:hover {
+    background: #319688;
+}
+
+@media (min-width: 640px) {
+    .modal {
+        width: 80%;
+    }
+}

@@ -1,7 +1,5 @@
-import { notFound } from "next/navigation";
-import CareProfileContent from "./CareProfileContent";
-
-interface CareProfile {
+// Interface for the care profile data
+export interface CareProfile {
   id: string;
   name: string;
   age: number;
@@ -9,8 +7,8 @@ interface CareProfile {
   preferences: string[];
 }
 
-// Mock data for initial profiles
-const initialCareProfiles: Record<string, CareProfile> = {
+// Mock data for care profiles
+export const initialCareProfiles: Record<string, CareProfile> = {
   "margaret-wilson": {
     id: "margaret-wilson",
     name: "Margaret Wilson",
@@ -35,16 +33,16 @@ const initialCareProfiles: Record<string, CareProfile> = {
   },
 };
 
-export default function CareProfilePage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const profile = initialCareProfiles[params.id];
-
-  if (!profile) {
-    notFound();
-  }
-
-  return <CareProfileContent initialProfile={profile} />;
+// Separate async data fetching function (for future use with real API)
+export async function getProfileData(
+  id: string
+): Promise<CareProfile | undefined> {
+  // In a real app, this would fetch from an API
+  // For demo purposes, we're just using mock data
+  return initialCareProfiles[id];
 }
+
+// Synchronous version for client-side use
+export function getProfileSync(id: string): CareProfile | undefined {
+  return initialCareProfiles[id];
+} 

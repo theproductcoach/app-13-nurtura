@@ -35,7 +35,7 @@ export default function LoginPage() {
           >
             <span className={styles.roleIcon}>👨‍👩‍👧‍👦</span>
             <span className={styles.roleText}>
-              I'm organising care for a parent
+              I&apos;m organising care for a parent
             </span>
           </div>
 
@@ -47,7 +47,7 @@ export default function LoginPage() {
           >
             <span className={styles.roleIcon}>👩‍⚕️</span>
             <span className={styles.roleText}>
-              I'm a carer offering my services
+              I&apos;m a carer offering my services
             </span>
           </div>
         </div>

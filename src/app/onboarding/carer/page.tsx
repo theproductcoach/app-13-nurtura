@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import styles from "./layout.module.css";
 
 const QUALIFICATIONS = [
@@ -49,7 +48,7 @@ export default function CarerOnboardingPage() {
   });
   const [showWelcome, setShowWelcome] = useState(false);
 
-  const updateFormData = (field: string, value: any) => {
+  const updateFormData = (field: string, value: string | string[] | null) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -99,6 +98,7 @@ export default function CarerOnboardingPage() {
               <label className={styles.photoUpload}>
                 <div className={styles.photoPreview}>
                   {formData.photo ? (
+                    // eslint-disable-next-line @next/next/no-img-element
                     <img src={formData.photo} alt="Profile preview" />
                   ) : (
                     <span className={styles.photoIcon}>📷</span>

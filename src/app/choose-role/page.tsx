@@ -28,7 +28,7 @@ export default function ChooseRole() {
             <span className={styles.roleIcon}>👨‍👩‍👧‍👦</span>
             <div className={styles.roleContent}>
               <h2 className={styles.roleTitle}>
-                I'm organising care for a parent
+                I&apos;m organising care for a parent
               </h2>
               <p className={styles.roleDescription}>
                 Set up and manage care schedules, coordinate with family
@@ -41,7 +41,7 @@ export default function ChooseRole() {
             <span className={styles.roleIcon}>👩‍⚕️</span>
             <div className={styles.roleContent}>
               <h2 className={styles.roleTitle}>
-                I'm offering my services as a carer
+                I&apos;m offering my services as a carer
               </h2>
               <p className={styles.roleDescription}>
                 Create your profile, set your availability, and connect with

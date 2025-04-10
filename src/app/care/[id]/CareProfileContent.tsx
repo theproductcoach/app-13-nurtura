@@ -1,15 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
-
-interface CareProfile {
-  id: string;
-  name: string;
-  age: number;
-  address: string;
-  preferences: string[];
-}
+import type { CareProfile } from "@/lib/careProfiles";
 
 // Edit icon component
 const EditIcon = () => (
@@ -40,6 +33,18 @@ export default function CareProfileContent({
     ...profile.preferences,
   ]);
   const [showConfirmation, setShowConfirmation] = useState(false);
+
+  // This effect could be used to fetch additional data after initial render
+  useEffect(() => {
+    // Example of client-side data augmentation if needed
+    const getAdditionalProfileData = async () => {
+      // In a real app, you might fetch additional data from an API here
+      // For demo, we'll just use the initial profile
+      console.log("Client component mounted with profile:", profile.name);
+    };
+
+    getAdditionalProfileData();
+  }, [profile.id, profile.name]); // Include profile.name in the dependency array
 
   const handleSaveAddress = () => {
     setProfile((prev) => ({
@@ -88,7 +93,9 @@ export default function CareProfileContent({
         <Link href="/dashboard" className={styles.backButton}>
           ← Back to Dashboard
         </Link>
-        <h1 className={styles.profileName}>{profile.name}'s Care Profile</h1>
+        <h1 className={styles.profileName}>
+          {profile.name}&apos;s Care Profile
+        </h1>
         <p className={styles.profileAge}>Age: {profile.age}</p>
       </header>
 

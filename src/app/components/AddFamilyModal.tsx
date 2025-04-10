@@ -1,61 +1,47 @@
+"use client";
 import { useState } from "react";
-import styles from "./AddVisitModal.module.css"; // Reusing the same styles
+import styles from "./Modal.module.css";
 
 interface AddFamilyModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (familyData: any) => void;
+  onAddFamily: (familyData: {
+    name: string;
+    age: string;
+    relationship: string;
+  }) => void;
 }
 
 export default function AddFamilyModal({
   isOpen,
   onClose,
-  onSave,
+  onAddFamily,
 }: AddFamilyModalProps) {
-  const [formData, setFormData] = useState({
-    name: "",
-    relationship: "",
-    email: "",
-  });
-
-  if (!isOpen) return null;
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [relationship, setRelationship] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    onAddFamily({ name, age, relationship });
+    setName("");
+    setAge("");
+    setRelationship("");
     onClose();
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const relationships = [
-    "Daughter",
-    "Son",
-    "Sibling",
-    "Partner",
-    "Friend",
-    "Other Family",
-  ];
+  if (!isOpen) return null;
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.header}>
-          <h2 className={styles.title}>Add Family Member</h2>
-          <p className={styles.subtitle}>
-            Invite a family member to join your care circle
-          </p>
+    <div className={styles.modalOverlay}>
+      <div className={styles.modal}>
+        <div className={styles.modalHeader}>
+          <h2 className={styles.modalTitle}>Add a Family Member</h2>
+          <button className={styles.closeButton} onClick={onClose}>
+            &times;
+          </button>
         </div>
-
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.modalForm}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>
               Name
@@ -63,52 +49,40 @@ export default function AddFamilyModal({
             <input
               type="text"
               id="name"
-              name="name"
               className={styles.input}
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter family member's name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
-
+          <div className={styles.formGroup}>
+            <label htmlFor="age" className={styles.label}>
+              Age
+            </label>
+            <input
+              type="number"
+              id="age"
+              className={styles.input}
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              required
+            />
+          </div>
           <div className={styles.formGroup}>
             <label htmlFor="relationship" className={styles.label}>
               Relationship
             </label>
-            <select
-              id="relationship"
-              name="relationship"
-              className={styles.select}
-              value={formData.relationship}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select relationship</option>
-              {relationships.map((rel) => (
-                <option key={rel} value={rel}>
-                  {rel}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="email" className={styles.label}>
-              Email Address (Optional)
-            </label>
             <input
-              type="email"
-              id="email"
-              name="email"
+              type="text"
+              id="relationship"
               className={styles.input}
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter email address"
+              value={relationship}
+              onChange={(e) => setRelationship(e.target.value)}
+              required
+              placeholder="e.g. Mother, Father"
             />
           </div>
-
-          <div className={styles.footer}>
+          <div className={styles.modalFooter}>
             <button
               type="button"
               className={styles.cancelButton}
@@ -116,8 +90,8 @@ export default function AddFamilyModal({
             >
               Cancel
             </button>
-            <button type="submit" className={styles.saveButton}>
-              Send Invite
+            <button type="submit" className={styles.submitButton}>
+              Add Family Member
             </button>
           </div>
         </form>

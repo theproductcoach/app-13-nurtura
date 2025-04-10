@@ -24,7 +24,7 @@ export default function OnboardingPage() {
     inviteEmails: [""],
   });
 
-  const updateFormData = (field: string, value: any) => {
+  const updateFormData = (field: string, value: string | string[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 

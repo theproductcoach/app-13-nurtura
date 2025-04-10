@@ -2,25 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
 
-// Mock data for today's visits
-const todaysVisits = [
-  {
-    time: "9:00 AM - 10:30 AM",
-    carer: "Sarah Johnson",
-    tasks: "Morning routine, medication, breakfast",
-  },
-  {
-    time: "2:00 PM - 3:30 PM",
-    carer: "Michael Chen",
-    tasks: "Lunch, afternoon walk, vital signs check",
-  },
-  {
-    time: "8:00 PM - 9:00 PM",
-    carer: "Emma Williams",
-    tasks: "Evening routine, medication, light dinner",
-  },
-];
-
 const features = [
   {
     title: "Schedule Visits",

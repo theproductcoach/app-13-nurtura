@@ -7,16 +7,6 @@ import AddTaskModal from "../components/AddTaskModal";
 import AddFamilyModal from "../components/AddFamilyModal";
 
 // Icons
-const PlusIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-  >
-    <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-  </svg>
-);
-
 const CalendarIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -105,26 +95,24 @@ export default function Dashboard() {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState("");
 
-  const handleSaveVisit = (visitData: any) => {
+  const handleSaveVisit = (visitData: { date: string; time: string; carer: string; notes: string }) => {
     console.log("New visit data:", visitData);
     setConfirmationMessage("Visit scheduled successfully!");
     setShowConfirmation(true);
     setTimeout(() => setShowConfirmation(false), 3000);
   };
 
-  const handleSaveTask = (taskData: any) => {
+  const handleSaveTask = (taskData: { task: string; dueDate: string; assignedTo: string }) => {
     console.log("New task data:", taskData);
     setConfirmationMessage("Task added successfully!");
     setShowConfirmation(true);
     setTimeout(() => setShowConfirmation(false), 3000);
   };
 
-  const handleSaveFamily = (familyData: any) => {
+  const handleSaveFamily = (familyData: { name: string; age: string; relationship: string }) => {
     console.log("New family member data:", familyData);
     setConfirmationMessage(
-      `Invitation sent to ${familyData.name}${
-        familyData.email ? ` (${familyData.email})` : ""
-      }`
+      `Family member ${familyData.name} (${familyData.relationship}) added successfully!`
     );
     setShowConfirmation(true);
     setTimeout(() => setShowConfirmation(false), 3000);
@@ -152,7 +140,7 @@ export default function Dashboard() {
 
       <header className={styles.header}>
         <h1 className={styles.welcomeText}>Welcome Back, Jeannie</h1>
-        <p className={styles.welcomeSubtext}>Here's your overview for today</p>
+        <p className={styles.welcomeSubtext}>Here&apos;s your overview for today</p>
       </header>
 
       <section className={styles.section}>
@@ -196,7 +184,7 @@ export default function Dashboard() {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <div className={styles.sectionTitleRow}>
-            <h2 className={styles.sectionTitle}>Today's Scheduled Visits</h2>
+            <h2 className={styles.sectionTitle}>Today&apos;s Scheduled Visits</h2>
           </div>
           <div className={styles.buttonRow}>
             <button
@@ -228,19 +216,19 @@ export default function Dashboard() {
       <AddVisitModal
         isOpen={isAddVisitModalOpen}
         onClose={() => setIsAddVisitModalOpen(false)}
-        onSave={handleSaveVisit}
+        onAddVisit={handleSaveVisit}
       />
 
       <AddTaskModal
         isOpen={isAddTaskModalOpen}
         onClose={() => setIsAddTaskModalOpen(false)}
-        onSave={handleSaveTask}
+        onAddTask={handleSaveTask}
       />
 
       <AddFamilyModal
         isOpen={isAddFamilyModalOpen}
         onClose={() => setIsAddFamilyModalOpen(false)}
-        onSave={handleSaveFamily}
+        onAddFamily={handleSaveFamily}
       />
     </div>
   );

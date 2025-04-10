@@ -1,134 +1,89 @@
+"use client";
 import { useState } from "react";
-import styles from "./AddVisitModal.module.css"; // Reusing the same styles
+import styles from "./Modal.module.css";
 
 interface AddTaskModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (taskData: any) => void;
+  onAddTask: (taskData: {
+    task: string;
+    dueDate: string;
+    assignedTo: string;
+  }) => void;
 }
 
 export default function AddTaskModal({
   isOpen,
   onClose,
-  onSave,
+  onAddTask,
 }: AddTaskModalProps) {
-  const [formData, setFormData] = useState({
-    recipient: "",
-    title: "",
-    description: "",
-    dueDate: "",
-    dueTime: "",
-  });
-
-  if (!isOpen) return null;
+  const [task, setTask] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [assignedTo, setAssignedTo] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    onAddTask({ task, dueDate, assignedTo });
+    setTask("");
+    setDueDate("");
+    setAssignedTo("");
     onClose();
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  if (!isOpen) return null;
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.header}>
-          <h2 className={styles.title}>Add New Task</h2>
-          <p className={styles.subtitle}>
-            Create a new task for a care recipient
-          </p>
+    <div className={styles.modalOverlay}>
+      <div className={styles.modal}>
+        <div className={styles.modalHeader}>
+          <h2 className={styles.modalTitle}>Add New Task</h2>
+          <button className={styles.closeButton} onClick={onClose}>
+            &times;
+          </button>
         </div>
-
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.modalForm}>
           <div className={styles.formGroup}>
-            <label htmlFor="recipient" className={styles.label}>
-              Care Recipient
-            </label>
-            <select
-              id="recipient"
-              name="recipient"
-              className={styles.select}
-              value={formData.recipient}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select a care recipient</option>
-              <option value="Margaret Wilson">Margaret Wilson</option>
-              <option value="Robert Wilson">Robert Wilson</option>
-            </select>
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="title" className={styles.label}>
-              Task Title
+            <label htmlFor="task" className={styles.label}>
+              Task
             </label>
             <input
               type="text"
-              id="title"
-              name="title"
+              id="task"
               className={styles.input}
-              value={formData.title}
-              onChange={handleChange}
-              placeholder="Enter task title"
+              value={task}
+              onChange={(e) => setTask(e.target.value)}
               required
+              placeholder="Describe the task"
             />
           </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="description" className={styles.label}>
-              Description
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              className={styles.textarea}
-              value={formData.description}
-              onChange={handleChange}
-              placeholder="Enter task description"
-              required
-            />
-          </div>
-
           <div className={styles.formGroup}>
             <label htmlFor="dueDate" className={styles.label}>
-              Due Date (Optional)
+              Due Date
             </label>
             <input
               type="date"
               id="dueDate"
-              name="dueDate"
               className={styles.input}
-              value={formData.dueDate}
-              onChange={handleChange}
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
+              required
             />
           </div>
-
           <div className={styles.formGroup}>
-            <label htmlFor="dueTime" className={styles.label}>
-              Due Time (Optional)
+            <label htmlFor="assignedTo" className={styles.label}>
+              Assigned To
             </label>
             <input
-              type="time"
-              id="dueTime"
-              name="dueTime"
+              type="text"
+              id="assignedTo"
               className={styles.input}
-              value={formData.dueTime}
-              onChange={handleChange}
+              value={assignedTo}
+              onChange={(e) => setAssignedTo(e.target.value)}
+              placeholder="Who should complete this task?"
+              required
             />
           </div>
-
-          <div className={styles.footer}>
+          <div className={styles.modalFooter}>
             <button
               type="button"
               className={styles.cancelButton}
@@ -136,8 +91,8 @@ export default function AddTaskModal({
             >
               Cancel
             </button>
-            <button type="submit" className={styles.saveButton}>
-              Save Task
+            <button type="submit" className={styles.submitButton}>
+              Add Task
             </button>
           </div>
         </form>
